@@ -1,0 +1,1186 @@
+h2 {
+	font-weight: 400 !important;
+}
+
+.error_list li {
+	float: left;
+}
+
+@font-face {
+	font-family: 'roboto bold';
+	src: url('fonts/Roboto/Roboto-Bold.tff');
+}
+
+@font-face {
+  font-family: 'raleway';
+  src: url('fonts/Raleway/Raleway-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url('fonts/Roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'roboto light';
+  src: url('fonts/Roboto/Roboto-Light.ttf');
+}
+
+.error_messages p{
+	float: left;
+	clear: both;
+}
+
+.error_messages {
+	float: left;
+	clear: both;
+}
+
+#body_library #col_title {
+	margin-top: 20px;
+}
+
+#col_title{
+	text-align: center;
+	font-family: raleway;
+	font-size: 36px;
+	font-weight: 600 !important;
+	margin-top: 90px;
+	margin-bottom: -10px;
+}
+
+#signup_div button,
+#login_div button,
+#forgot_div button {
+	cursor: pointer;
+    background-color: #2196F3;
+    border-radius: 6px;
+    padding-left: 15px;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    float: left;
+    clear: both;
+    margin-top: 20px;
+}
+
+#signup_div label,
+#login_div label,
+#forgot_div label {
+	margin-top: 10px;
+	margin-bottom: 5px;
+	clear: both;
+	float: left;
+}
+
+#signup_div input,
+#login_div input,
+#forgot_div input {
+	clear: both;
+	float: left;
+	font-size: 17px;
+}
+
+#forgot_div{
+	font-family: roboto;
+	margin-left: 50px;
+	margin-top: 80px;
+}
+
+.page-wrap-footer {
+  min-height: 100%;
+  /* equal to footer height */
+	margin-bottom: -50px; 
+}
+.page-wrap-footer:after {
+  content: "";
+  display: block;
+}
+.suggestions, .page-wrap-footer:after {
+  /* .push must be the same height as footer */
+	height: 50px; 
+}
+
+#lib_not {
+	font-size: 16px;
+	color: midnightblue;
+	font-family: roboto;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.dialogIsOpen #disablingDiv {
+  position: absolute;
+  z-index: 1000;
+  /* Blur and de-color */
+  background-color: black;
+  opacity: 0.5;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.lang_icon {
+	width: 19px;
+	margin-bottom: -4px;
+	cursor: pointer;
+}
+
+.spacer_langs{
+	text-align: center;
+	margin-top: 15px;
+	height: 30px;
+	font-family: roboto;
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
+#left span {
+	background-color; transparent;
+}
+
+.banner img {
+	width: 25px;
+}
+
+.close_icon img {
+	z-index: 100;
+	width: 20px;
+}
+
+#contact_text {
+	margin-bottom: 30px;
+}
+
+#contact_body form button {
+    cursor: pointer;
+    background-color: #2196F3;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;	
+    margin-top: 15px;
+    left: 20%;
+    float: left;
+    clear: left;
+}
+#contact_body form textarea,
+#contact_body form label {
+	margin-top: 10px;
+	float: left;
+	clear: both;
+}
+
+#contact_body form input {
+	float: left;
+	clear: both;
+}
+
+#contact_body form + p {
+	height: auto;
+	margin-top: 30px;
+}
+
+#contact_body form label {
+	font-family: roboto;
+}
+
+.contact_label {
+	font-family: roboto;
+	font-size: 14px;
+}
+
+
+#id_contact_name, #id_contact_email {
+	background: whitesmoke;
+	height: 20px;
+	width: 500px;
+	font-size: 14px;
+	margin-top: 3px;
+	margin-bottom: 5px;
+	border: 2px solid lightgrey;
+	border-radius: 6px;
+}
+
+#id_content {
+	background: whitesmoke;
+	border-radius: 6px;
+	border: 2px solid lightgrey;
+	width: 500px;
+	font-size: 14px;
+	margin-top: 3px;
+	height: 150px;
+}
+
+#contact_body {
+	left: 25%;
+	padding-left: 100px;
+	padding-top: 70px;
+}
+
+#suggestions_link {
+	text-decoration: none;
+	font-family: 'roboto';
+}
+
+html {
+	height:100%;
+}
+
+.suggestions {
+   ottom: 0;
+   padding-top: 25px;
+   text-align: center;
+   height: 50px;
+   width: 100%;
+   background: WhiteSmoke;
+   color: black;
+   font-family: roboto;
+}
+
+#chapter {
+	margin-right: 7px;
+	color: black;
+	float: left;
+	font-family: roboto;
+	margin-top: 9px;
+	font-size: 14px;
+}
+
+.gray_out {
+    
+    opacity:0.3;    /* -> transparency 50% */
+}
+
+#lang_arrow{
+	font-size: 36px;
+}
+
+#continue_reading {
+	background: white;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: -24px;
+}
+
+.corner_signup {
+	cursor: pointer;
+        background-color: #2196F3;
+        border-radius: 6px;
+        border: none;
+        color: white;
+        padding: 8px 15px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        font-family: roboto;
+        float:right;
+        margin-top: 9px;
+        margin-right: 48px;
+	margin-left: 10px;
+}
+
+.corner_login{
+	cursor: pointer;
+        background-color: darkgrey;
+        border-radius: 6px;
+        border: none;
+        color: white;
+        padding: 8px 15px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        font-family: roboto;
+        float:right;
+        margin-top: 9px;
+}
+.corner_logout {
+	cursor: pointer;
+    	background-color: darkgrey;
+    	border-radius: 6px;
+    	border: none;
+    	color: white;
+    	padding: 8px 15px;
+    	text-align: center;
+    	text-decoration: none;
+    	font-size: 14px;
+	font-family: roboto;
+	float:right;
+	margin-top: 9px;
+	margin-right: 48px;
+}
+
+.corner_library {
+        cursor: pointer;
+        background-color: whitesmoke;
+        border-radius: 6px;
+        border: none;
+        color: black;
+        padding: 8px 15px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        font-family: roboto;
+        float:right;
+	margin-right: 10px;
+        margin-top: 9px;
+}
+
+.corner_library:hover {
+	background-color: lightgrey;
+}
+
+.header h1 {
+	font-family: 'raleway';
+	margin-top: 10px;
+	float: left;
+}
+
+.header_lib h1 {
+	font-family: 'raleway';
+	margin-top: 10px;
+	float: left;
+	width: 100px;
+}
+
+.library_section {
+	margin-left: 30px;
+	clear: both;	
+}
+
+.spacer .category{
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: -24px;
+	z-index: 100;
+	background: white;
+	margin-bottom: 20px;
+}
+
+.spacer {
+	padding-top: 20px;
+	height: 55px;
+	text-align: center;
+	font-family: 'raleway';
+	font-size: 24px;
+}
+
+.inner_book_div:hover #book_image{
+	opacity: 0.8;
+}
+
+.inner_book_div:hover .overlay{
+	visibility: visible;
+}
+
+.inner_book_div:hover .col_overlay{
+	visibility: visible;
+}
+
+.book_div p {
+	overflow: auto;
+	font-family: roboto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 12px;
+}
+
+
+
+.library {
+	text-family: roboto;
+	right: 0;
+	width: 100%;
+	display: inline-block;
+}
+
+#language_form {
+	margin-left: -179px;
+	margin-top: 60px;
+}
+
+#language_form label {
+	margin-left: 10px;
+	font-family: roboto
+}
+
+select {
+  border: solid 1px darkgrey;
+  border-radius: 4px;
+  font-family: roboto;
+  font-size: 14px;
+  line-height: 1.5em;
+  padding: 0.25em 3.5em 0.25em 1.0em;
+    margin-left: 15px;      
+  margin-right: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+    background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%);
+  background-position:
+    calc(100% - 19px) calc(0.7em + 2px),
+    calc(100% - 15px) calc(0.7em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    border-radius: 6px;
+    background-color: lightgrey;
+    color: black;
+    padding: 12px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.menuspan {
+	margin-top: 5px;
+	margin-right: 48px;
+    	float: right;
+	clear: right;
+	
+}
+
+/* Dropdown Content (Hidden by Default) */
+
+.dropdown-content {
+    margin-right: 24px;
+    position: absolute;
+    right: 0;
+    top:50px;
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    font-family: roboto;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+#msg_success{
+	color: limegreen;
+	width: 500px;
+	height: 0;
+	margin-left: 15px;
+	font-family: roboto;
+	margin-top: 23px;
+}
+
+.msg_show {
+	width: 500px;
+	height: 40px;
+}
+
+.show {display:block;}
+
+.menu:hover .menu:focus {
+	background-color: darkgray;
+}
+
+.menu {
+	float:right;
+	clear:left;
+	border-radius: 6px;
+	background-color: lightgrey;
+    	color: white;
+    	padding: 12px;
+    	font-size: 14px;
+    	border: none;
+    	cursor: pointer;
+	text-decoration: none;
+}
+
+#book_titles {
+        width: 82%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+        overflow: hidden;
+	position: absolute;
+	top: 50%;
+        transform:translateY(-50%);
+	font-family: roboto;
+	font-size: 24px;
+}
+
+.header{
+	z-index: 200;
+	height: 50px;
+	padding-left: 24px;
+	padding-right: 24px;
+	left:0;
+	top:0;
+	width:100%;
+	background-color: whitesmoke;
+}
+
+.header_lib {
+	z-index: 200;
+        height: 50px;
+	padding-left: 24px;
+        padding-right: 24px;
+        left:0;
+        top:0;
+        width:100%;
+        background-color: whitesmoke;
+}
+
+.pagination {
+	position: absolute;
+	top: 50%;
+}
+
+#matchingtext {
+	text-background: WhiteSmoke;
+	margin-right: 8px;
+	margin-top: 15px;
+	float:right;
+	color: black;
+	font-family: roboto;
+}
+
+#body_library {
+	margin: 0;
+	height:auto !important;
+  	height:100%;
+	position: relative;
+	min-height: 100%;
+}
+
+.footer {
+   height: 50px;
+   padding-left: 24px;
+   padding-right: 24px;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: WhiteSmoke;
+   color: white;
+}
+
+.book_div{
+	height: 350px;
+	display: inline-block;
+	margin-right: 50px;
+	float: left;
+}
+
+.inner_book_div {
+	height: 200px;
+	display:inline-block;
+	position:relative;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#a_id{
+	position:relative;
+}
+
+#book_image {
+	width:inherit;
+	height:200px;
+}
+
+.not_col {
+	visibility: hidden;
+}
+
+.close_icon {
+	z-index: 2000;
+	visibility: hidden;
+	position: absolute;
+	bottom:180px;
+	right: 10%;
+	width: 15px;
+	height: 15px;
+}
+
+.close_icon img:hover {
+	opacity: 0.8;
+}
+
+/*.circle {
+	right:10px;
+	bottom:12px;	
+	position: absolute;
+ 	text-align:center;
+	border: solid;
+	width: 30px;
+	height: 30px;
+	background: white;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+} */
+
+.overlay {
+	mix-blend-mode: darken;
+	visibility: hidden;
+	background-color: black;
+	opacity: 0.6;
+	margin: 0 auto;
+	width: 100%;
+	height: 200px;
+	text-align: center;
+	position: absolute;
+	margin-top: -203.5px;
+}
+
+.col_overlay {
+	mix-blend-mode: darken;
+        visibility: hidden;
+        background-color: black;
+        opacity: 0.4;
+        margin: 0 auto;
+        width: 100%;
+        height: 200px;
+        text-align: center;
+        position: absolute;
+	margin-top: -203.5px;
+}
+
+.circle {
+	visibility: hidden;
+	margin: 0 auto;
+        width: 100%;
+        height: 200px;
+        text-align: center;
+        position: absolute;
+        margin-top: -200px;
+}
+
+.inviz {
+	visibility:hidden;
+}
+
+.inner_book_div:hover a .circle #col_num {
+	visibility: visible;
+}
+
+.inner_book_div:hover a .circle .col_text {
+	visibility: visible;
+}
+
+.inner_book_div:hover a .close_icon{
+	opacity: 1;
+	visibility: visible;
+}
+
+#col_num {
+	visibility: inherit;
+	position:absolute;
+  	margin: 0 auto;
+	font-weight: bold;
+	font-family: roboto;
+  	left: 0; 
+  	right: 0; 
+ 	top:27%;
+	color: white;
+	font-size: 24px;
+}
+
+.col_text{
+	font-size: 16px;
+	width: 80px;
+	visibility: inherit;
+	position: absolute;
+	margin: 0 auto;
+	font-family: roboto;
+	left: 0;
+	right: 0;
+	top: 45%;
+	color: white;
+}
+
+.close_icon.not_done {
+	visibility:hidden;
+}
+
+.banner.not_done {
+	visibility: hidden;
+}
+
+.banner img {
+	width: 27px;
+}
+
+.banner {
+  top: -185.5px;
+  left:10%;
+  padding-top: 0px;
+  position: absolute;
+}
+
+#lib_conts {
+	margin-left: 30px;
+	clear: both;
+}	
+
+#lib {
+	clear:both;
+}
+
+div {
+	scroll-behavior: smooth;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  float:right;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-top: 25px;
+  margin-right: 48px;
+  top: 50%;
+  transform:translateY(-50%);
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  right:0;
+  left:0;
+  top: 0;
+  bottom:0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: LightGrey;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.button {
+    cursor: pointer;
+    position: relative;
+    top: 50%;
+    transform:translateY(-50%);
+    background-color: #2196F3;
+    border-radius: 6px;
+    padding-left: 15px;
+    left:0;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#got_it{
+    cursor: pointer;
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    background-color: #2196F3;
+    border-radius: 6px;
+    padding-left: 15px;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    z-index: 20000;
+
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 5000; /* Sit on top */
+    left: 30%;
+    top: 30%;
+    width: 500px; /* Full width */
+    height: 160px; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: white; /* Fallback color */
+    border: 1px solid #888;
+    border-radius: 6px;
+}
+
+.modal button {
+    border: 1px solid darkgrey;
+    margin-top: 30px;
+    cursor: pointer;
+    position: relative;
+    top: 70%;
+    transform:translateY(-50%);
+    background-color: #2196F3;
+    border-radius: 6px;
+    padding-left: 15px;
+    left:60%;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+
+}
+
+.modal-content {
+    background-color: white;
+    font-family: roboto;
+    margin: 35px; /* 15% from the top and centered */
+    width: 80%; /* Could be more or less, depending on screen size */
+    height: 90%;
+}
+
+/* The Close Button */
+.close_log {
+	color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: -20px;
+    margin-top: -15px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: -30px;
+    margin-top: -20px;
+}
+
+.close_log:hover,
+.close_log:focus,
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.menucontainer {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.line {
+  margin-top: 10px;
+  height: 2px;
+  left: 24px;
+  border-bottom: 1px solid lightgrey;
+  width: 95%;
+  position: absolute;
+  z-index: -100;
+}
+
+#shownlanguages {
+	border-radius: 6px;
+	cursor: pointer;
+	-webkit-user-select: none;
+    	-moz-user-select: none;
+    	-ms-user-select: none;
+    	user-select: none;
+	position: relative;
+	padding: 10px;
+	padding-top: 5px;
+	overflow: -moz-scrollbars-vertical;
+	overflow: scroll;
+	height: 120px;
+	width: 100px;
+	color: linen;
+	background-color: #36383c;
+	z-index: 5000;
+    	left: 120px;
+    	top: -134px;
+}
+
+#warning {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 200px;
+    width: 400px;
+    height: 130px;
+    border: 1px solid black;
+    background-color: white;
+    font-family: roboto;
+    color: black;
+    text-align: left;
+    border-radius: 6px;
+    padding: 15px 15px;
+    position: absolute;
+    z-index: 20000;
+}
+
+.popup {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-right: 7px;
+    margin-top: 15px;
+    float:right;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    font-family: 'roboto light';
+    visibility: hidden;
+    width: 250px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 12px 12px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    right: 147px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+#popup_arrow {
+    content: "";
+    position: relative;
+    top: 100%;
+    width: 0px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #36383c transparent transparent transparent;
+    margin-top:-150px;
+    margin-left: 110px;
+    transform: rotate(90deg);
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+#shownlanguages::-webkit-scrollbar {
+    width:15px;
+    height: 0;
+}
+
+#shownlanguages::-webkit-scrollbar-track {
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    background:#36383c;
+}
+
+#shownlanguages::-webkit-scrollbar-thumb {
+    -webkit-border-radius:5px;
+    border-radius:10px;
+    background:gray;
+    border: 4px solid #36383c;
+}
+
+#shownlanguages::-webkit-scrollbar-thumb:window-inactive {
+    background:gray;
+}
+
+#login_div {
+    font-family: roboto;
+    display: none;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 120px;
+    width: 400px;
+    height: auto;
+    border: 1px solid black;
+    background-color: white;
+    font-family: roboto;
+    color: black;
+    text-align: left;
+    border-radius: 6px;
+    padding: 15px 30px;
+    padding-bottom: 30px;
+    position: absolute;
+    z-index: 20000;
+}
+
+#signup_div {
+    font-family: roboto;
+    display: none;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 120px;
+    width: 400px;
+    height: auto;
+    border: 1px solid black;
+    background-color: white;
+    font-family: roboto;
+    color: black;
+    text-align: left;
+    border-radius: 6px;
+    padding: 15px 30px;
+    padding-bottom: 30px;
+    position: absolute;
+    z-index: 20000;
+}
+
+.helptext_popup {
+	display: none;
+}

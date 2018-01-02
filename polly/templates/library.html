@@ -1,0 +1,30 @@
+
+
+
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+{% with name as name %}
+    {{ block.super }}
+  {% endwith %}
+{% with language_foreign as language_foreign%}
+    {{ block.super }}
+  {% endwith %}
+{% with language_native as language_native %}
+    {{ block.super }}
+  {% endwith %}
+<div class='library'>
+{% if conts_html|length > 0 %}
+		<div id="lib_conts">
+                <div class='spacer'><span class='line'></span><span id='continue_reading' >Continue reading </span></div>
+        	{{conts_html|escape|safe}} </div>
+	{% endif %}
+        {% if new_books_html|length > 10 %}
+		<div id="lib">
+		{{new_books_html|escape|safe}} </div>	
+	{% else %}
+                <div id="lib_not">
+                We're sorry! There are no books available in these two languages. </div>
+        {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="pinterest" content="nopin" />
+	<meta charset="utf-8">
+        <title>Polly!</title>
+	{% load static %}
+	{% load staticfiles %}
+	{% include 'registration/login.html' %}
+  	{% include 'signup.html' %}
+  <script src="{% static "jquery.js" %}"></script>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts.css' %}">
+<style>
+</style>
+
+<script>
+
+function esc_quot(text)
+{
+    return text.replace("\"", "\\\"");
+}
+
+function initialize() {
+	temp_nat = "{{language_native}}";
+	temp_for = "{{language_foreign}}";
+	if (temp_nat == 'all') {
+		temp_nat = '';
+		foreign_label = document.getElementById('language_form').getElementsByTagName('label')[0].style.visibility='visible';
+	}
+	if (temp_for =='all') {
+		temp_for = '';
+		foreign_label = document.getElementById('language_form').getElementsByTagName('label')[0].style.visibility='visible';
+	}
+	if (temp_for !='' & temp_nat !='') {
+		foreign_label = document.getElementById('language_form').getElementsByTagName('label')[0].style.visibility='hidden';
+		divs = document.getElementsByClassName('book_div');
+		for (i=0;i<divs.length;i++){
+			newNode = document.createElement('p');
+			newNode.innerHTML = temp_nat.substring(0,3) + '→' + temp_for.substring(0,3);
+			newNode.style.color = 'green';
+			divs[i].insertBefore(newNode, divs[i].getElementsByTagName('p')[2]);
+		}
+	}
+	document.getElementById('id_lang_native').value=temp_nat;
+	document.getElementById('id_lang_foreign').value=temp_for;
+	divs = document.getElementsByClassName('inner_book_div');
+	if (temp_nat=='' | temp_for=='') {
+		console.log('changing');
+		for (i=0;i<divs.length;i++){
+			console.log(divs[i].getElementsByTagName('a')[0].getElementsByTagName('div')[2].classList);
+			if ('not_col'==divs[i].getElementsByTagName('a')[0].getElementsByTagName('div')[2].classList[1]) {
+				divs[i].getElementsByTagName('a')[0].removeAttribute('href');
+			}
+			//divs[i].getElementsByTagName('a')[0].parentNode.parentNode.classList.toggle('gray_out');
+		}
+	}
+	console.log(divs);
+	for (i=0;i<divs.length;i++){
+		divs[i].parentNode.getElementsByTagName('p')[0].style.fontSize='13px';
+		wid = divs[i].offsetWidth;
+		console.log(wid);
+		pos_one = divs[i].getBoundingClientRect().left;
+		pos_two = divs[i].getElementsByTagName('a')[0].getBoundingClientRect().left;
+		console.log(pos_two);
+		console.log(pos_one);
+		texts = divs[i].parentElement.getElementsByTagName('p');
+		for (j=0;j<texts.length;j++){
+			console.log(pos_two-pos_one);
+			console.log(texts);
+			texts[j].style.marginLeft = (pos_two-pos_one) + 'px';
+			texts[j].style.width = wid+'px';
+		}
+	}
+	foreign_label = document.getElementById('language_form').getElementsByTagName('label')[1].style.fontSize='18px';
+}
+
+function showlanguages(e, langs){
+        var d = document.createElement('div');
+        var b_div = e.parentNode;
+        d.id = 'shownlanguages';
+        d.innerHTML = langs;
+        //d.onclick = function() {this.parentNode.querySelector('#popup_arrow').remove();this.remove();};
+        console.log('tagname');
+        console.log(b_div.lastChild.tagName);
+        var arrow=document.createElement('div');
+        arrow.id = 'popup_arrow';
+        if (b_div.lastChild.tagName != 'DIV'){
+                b_div.appendChild(d);
+                b_div.appendChild(arrow);
+        }
+}
+
+
+function removeBook(b_name) {
+	console.log('removeBook called');
+        console.log(b_name);
+	window['b_name'] = b_name;
+        var modal = document.getElementById('closeModal');
+        modal.style.display = "block";
+	$("body").toggleClass("dialogIsOpen");	
+}
+
+function reallyRemoveBook() {
+	var modal = document.getElementById('closeModal');
+	modal.style.display = "none";
+	console.log('deleteBook');
+	console.log(b_name);
+        $.ajax({
+		dataType:"json",
+		url:"/ajax/removebook",
+		data:{
+			'username': "{{user.get_username|safe}}",
+                	'book_name': b_name.replace("*apos*", "'").split("*q*").join("\""),
+                	'language_foreign': "{{language_foreign|safe}}",
+                	'language_native': "{{language_native|safe}}",
+		},
+		success: function(data){
+			$("body").toggleClass("dialogIsOpen");
+			b_id = data['b_id'];
+			console.log(b_id);
+			child = document.getElementById(b_id);
+			document.getElementById('lib_conts').removeChild(child);
+			link = child.childNodes[0].childNodes[0].href;
+			console.log(link);
+			console.log(b_id);
+			new_id = 'new'+b_id;
+			console.log(new_id);
+			document.getElementById(new_id).childNodes[0].childNodes[0].href = link.replace('/0/', '/1111111111/');
+		}
+    });
+}
+
+function reallyAddBook(book_name, language_native, language_foreign){
+console.log('adding book');
+console.log(book_name);
+console.log(book_name.replace("&apos","'"));
+$.ajax(
+    {
+        dataType:"json",
+        url: "/ajax/addbook",
+        data:{
+                'username': "{{user.get_username|safe}}",
+                'book_name': book_name.replace("&apos", "'").split("*q*").join("\""),
+                'language_foreign': language_foreign,
+                'language_native': language_native,
+        },
+	success: function( data ){
+        	console.log('adding word');
+		window.location.href = data.url;
+	}
+});
+}
+
+function login(){
+$.ajax(
+{
+	dataType:"json",
+	url: "/ajax/login",
+	data: $('#loginform').serialize(),
+	success: function( data ){
+		if (data['move']=='yes'){
+			window.location.href=data.url;
+		}
+		else{
+		ins = document.getElementById('login_div').getElementsByTagName('input');
+                for (i=0;i<ins.length;i++){
+                        console.log(ins[i]);
+                        ins[i].value = '';
+                }
+		document.getElementsByClassName('error_messages')[0].innerHTML = '';
+		document.getElementsByClassName('error_messages')[0].innerHTML = data['error_messages'];	
+		}
+	}
+});	
+}
+
+function signup(){
+$.ajax(
+{
+        dataType:"json",
+        url: "/ajax/signup",
+        data: $('#signupform').serialize(),
+        success: function( data ){
+                if (data['move']=='yes'){
+                        window.location.href=data.url;
+                }
+                else{
+		ins = document.getElementById('signup_div').getElementsByTagName('input');
+		for (i=0;i<ins.length;i++){
+			console.log(ins[i]);
+			ins[i].value = '';
+		}
+		document.getElementsByClassName('error_messages')[1].innerHTML = ''
+		for (i=0;i<data['error_messages'].length;i++){	
+			parg = document.createElement('p');
+			parg.innerHTML = data['error_messages'][i];
+			console.log(parg);
+			document.getElementsByClassName('error_messages')[1].appendChild(parg);
+                }
+		}
+        }
+});     
+}	
+
+function passToReallyAddBook() {
+	reallyAddBook(b_name, l_native, l_foreign);
+}
+
+function addBook(book_name, language_native, language_foreign){
+	console.log('addBook called');
+	window['b_name'] = book_name;
+	window['l_native'] = language_native;
+	window['l_foreign'] = language_foreign;
+	console.log(b_name);
+	var modal = document.getElementById('newModal');
+	modal.style.display = "block";
+}
+
+function getRidOfModal(modal){
+	modal.style.display = "none";
+	$("body").toggleClass("dialogIsOpen");
+	//document.getElementById('disablingDiv').style.display = 'none';
+}
+
+window.onclick = function(event) {
+	var t = event.target
+	var pars = document.getElementsByClassName('lang_icon');
+	for (i=0;i<pars.length;i++){
+		if (pars[i] != t){
+			if (pars[i].parentNode.querySelector('#shownlanguages')){
+			pars[i].parentNode.querySelector('#shownlanguages').remove();
+			pars[i].parentNode.querySelector('#popup_arrow').remove();
+			}
+		}
+	}
+	if (t!=document.GetElementsByClassName('lang_icon')[0]){
+		document.getElementById('shownlanguages').remove();
+		document.getElementById('popup_arrow').remove();
+	}
+}
+
+function open_signup() {
+	document.getElementById('signup_div').style.display = 'block';
+	$("body").toggleClass("dialogIsOpen");
+}
+
+function open_login() {
+	document.getElementById('login_div').style.display = 'block';
+	$("body").toggleClass("dialogIsOpen");
+}
+
+</script>
+	
+    </head>
+    <body id='body_library' onload="initialize()">
+	<div class='page-wrap-footer'>	
+	{% block login_content %}
+		{% endblock %}
+		{% block signup_content %}
+		{% endblock %}
+	<div id='disablingDiv'></div>
+	<div class='header_lib'>
+	<h1>POLLY</h1>
+	{% if user.is_authenticated %}
+	 <a class='corner_logout' href="{% url 'logout' %}">Log Out</a>
+	{% endif %}
+	{% if not user.is_authenticated %}
+	 <button class='corner_signup' onclick=open_signup() >Sign Up</button>
+         <button class='corner_login' onclick=open_login()>Log In</button>
+	{% endif %}
+	</div>
+	<div class='spacer_langs'>
+        <form name="language_form" id="language_form" action="{% url 'language_form' user_name=user_name book_name='0' language_native=language_native language_foreign=language_foreign%}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        </form>
+	</div>
+
+        {% block content %}
+        {% endblock %}
+
+    <div id="closeModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span onclick=getRidOfModal(document.getElementById('closeModal')) class="close">&times;</span>
+    <p>Are you sure you want to remove this book? Your current progress will be lost.</p>
+    <button type="button" id='dont_remove' onclick=getRidOfModal(document.getElementById('closeModal'))>Nevermind!</button>
+    <button type="button" id='do_remove' onclick=reallyRemoveBook(b_name)>Yes, I'm sure.</button>
+</div>
+</div>
+</div>
+<div class='suggestions'>
+        <span>Suggestions for books to add? </span><a href="{% url 'contact_me' %}" id='suggestions_link'>Contact </a><span>me and I'll do my best to add them to the library! </span>
+</div>
+    </body>
+</html>

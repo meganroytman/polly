@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block sidebar %}
+</div>
+
+  <div id="language_form">
+        <form action="{% url 'language_form' user_name=user.get_username language_native=language_native language_foreign=language_foreign %}" method="post">
+        {% csrf_token %}
+        <select name="lang_native">
+                {% for lang in languages%}
+                        <option value={{lang}}>{{lang}}</option>
+                {% endfor %}
+        </select>
+        <select name="lang_foreign">
+                {% for lang in languages%}
+                        <option value={{lang}}>{{lang}}</option>
+                {% endfor %}
+        </select>
+</form>
+ </div>
+{% endblock %}
+

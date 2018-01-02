@@ -1,0 +1,21 @@
+{% block login_content %}
+  <div id='login_div' style='display:none'>
+  <span onclick=getRidOfModal(document.getElementById('login_div')) class="close_log">&times;</span>
+  <h2>Login</h2>
+  <form id='loginform'>
+    {% csrf_token %}
+    {{ login_form.as_p }}
+  </form>
+    <button onclick='login()'>Login</button>
+   <p class='error_messages'></p>
+
+  {% if old_form.non_field_errors %}
+    <ul class='form-errors'>
+        {% for error in old_form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+  <a style='margin-top:10px; float:left; clear:both; text-decoration:none' href="{% url 'password_reset' %}">Forgot password?</a><br />
+  </div>
+{% endblock %}

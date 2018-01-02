@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'roboto';
+    src: local('fonts/Roboto/Roboto-Bold.tff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: ‘roboto';
+    src: local('fonts/Roboto/Roboto-Regular.tff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: ‘raleway';
+    src: local('fonts/Raleway/Raleway-Regular.tff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: ‘raleway';
+    src: local('fonts/Raleway/Raleway-SemiBold.tff');
+    font-weight: 600;
+    font-style: normal;
+}

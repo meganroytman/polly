@@ -1,0 +1,511 @@
+<html>
+
+<head>
+  {% load static %}
+  {% load staticfiles %}
+  {% include 'registration/login.html' %}
+  {% include 'signup.html' %}
+  <script src="{% static "jquery.js" %}"></script>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+<style>
+#body_reader {
+	margin: 0;
+	verflow-y: hidden;
+	height: 100%;
+}
+
+#content{
+	position: relative;
+        height: 100%;
+        margin-left: 24px;
+        width: 90%;
+}
+#left {
+    position: absolute;
+    left: 24px;
+    top: 50px;
+    bottom: 50px;
+    overflow: auto;
+    font-size: 20px;
+    bottom: 50px;
+    width: 48%;
+}
+#right {
+    position: absolute;
+    left: 54%;
+    top: 50px;
+    bottom: 50px;
+    padding-left: 20;
+    width: 48%;
+    overflow: auto;
+    font-size: 20px;
+}
+
+#foreign{
+	margin-right: 15px;
+}
+#native{
+	margin-right: 15px;
+}
+</style>
+
+<script>
+
+function lookForChange()
+{
+    var newEntered = document.getElementById("nameInput").value;
+    console.log(entered);
+    if (document.getElementById('nameInput')){
+    console.log('reached');
+    if (newEntered != entered) {
+        entered = newEntered;
+	console.log(entered);
+	console.log(newEntered);
+        letterpress();     // do whatever you need to do
+	}
+    }
+}
+
+function popupFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function menuFunction(x) {
+    document.getElementById("myDropdown").classList.toggle("show");
+    x.classList.toggle("change");
+}
+
+function highlight_func(){
+	console.log(document.getElementById('highlightswitch').checked);
+	highlight_val_first = document.getElementById('highlightswitch').checked;
+	if (highlight_val_first){highlight_val='on';}
+	else {highlight_val='off';}
+	console.log(highlight_val);
+	console.log('iter');
+	console.log({{iteration|safe}});
+	$.ajax(
+    {
+        dataType:"json",
+        url: "/ajax/highlight",
+        data:{
+        	'section': "{{section_on}}",
+                'highlight': highlight_val,
+                'username': '{{user_name|safe}}',
+                'book_name': "{{book_name|safe}}",
+                'language_foreign': '{{lang_foreign|safe}}',
+                'language_native': '{{lang_native|safe}}',
+                'latest_index': '{{iteration|safe}}',
+	},
+        success: function( data )
+        {
+		var sen_list = {{mappings}}[data['second_index']-1];
+		if (data['highlight']=='on'){
+		for (i = 0; i < sen_list.length; i++){
+                	native_id = '{{lang_native|safe}}'.substring(0,3)+sen_list[i];
+			document.getElementById(native_id).style.backgroundColor = "lemonchiffon";
+		}
+		}
+		else {
+		for (i = 0; i < sen_list.length; i++){
+                        native_id = '{{lang_native|safe}}'.substring(0,3)+sen_list[i];
+                        document.getElementById(native_id).style.backgroundColor = "transparent";
+                }	
+		}
+	}
+})
+}
+
+function getWidthOfText(txt){
+    if(getWidthOfText.e === undefined){
+        getWidthOfText.e = document.createElement('span');
+        document.getElementById('content').appendChild(getWidthOfText.e);
+    }
+    getWidthOfText.e.style.visible;
+    getWidthOfText.e.position = 'absolute';
+    getWidthOfText.e.marginTop = '-40px';
+    getWidthOfText.e.innerText = txt;
+    sz = window.getComputedStyle(document.getElementById('nameInput'), null).getPropertyValue('font-size');
+    ft = window.getComputedStyle(document.getElementById('nameInput'), null).getPropertyValue('font-family');
+    getWidthOfText.e.style.fontSize = sz;
+    getWidthOfText.e.style.fontFamily = ft;
+    console.log(getWidthOfText.e.style.fontSize);
+    console.log(getWidthOfText.e.style.fontFamily);
+    getWidthOfText.e.style.visibility = "hidden";
+    return getWidthOfText.e.offsetWidth + 6;
+}
+
+function initialize()
+{
+
+    if ("{{authed}}"=="False"){
+	document.getElementById('disablingDiv').style.display = 'block';
+	$("body").toggleClass("dialogIsOpen");
+	}
+    if ("{{lang_foreign}}"=='Hebrew'){
+	document.getElementById('foreign').style.direction='rtl';
+    }
+    if ("{{lang_native}}"=='Hebrew'){
+        document.getElementById('native').style.direction='rtl';
+    }
+
+    setInterval(lookForChange, 100);
+    entered = 'somethingveryrandom';
+    pag = document.getElementsByClassName('pagination')[0];
+    if ("{{section_on}}"=='1' & {{section_count}}>1){console.log({{section_on}});pag.getElementsByTagName('a')[0].classList.toggle('active');}
+    wid = pag.offsetWidth;
+    pag.style.right = "50%";
+    pag.style.top = "50%";
+    pag.style.transform = "translateX(" + (Math.round(wid/2) - 24) + "px) translateY(-50%)";
+    current_word = '{{current_word}}';
+    document.getElementById("nameInput").style.width=getWidthOfText(current_word);
+    //second_id = $("#nameInput").closest('span').attr('id')
+    sen_list = {{mappings}}[{{second_index}}-1];
+    console.log(sen_list);
+    $('#left').animate({scrollTop: document.getElementById("{{second_id}}").offsetTop-document.getElementById('left').clientHeight/2 +100}, 200);
+    for (i = 0; i < sen_list.length; i++) {
+	console.log(sen_list[i]);
+    	native_id = '{{lang_native|safe}}'.substring(0,3)+sen_list[i];
+	toggle = false
+	if ('{{highlight}}'=='on'){
+		toggle = true
+	}
+	document.getElementById('highlightswitch').checked = toggle;
+	if ('{{highlight}}'=='on'){
+	document.getElementById(native_id).style.backgroundColor = "lemonchiffon";
+	}
+    	if (i==0){
+	document.getElementById(native_id).scrollIntoView();
+    	//document.getElementById('right').scrollBy(0, document.getElementById(native_id).getBoundingClientRect().height-document.getElementById('right').clientHeight/2);
+    	$('#right').animate({scrollTop: document.getElementById(native_id).offsetTop-document.getElementById('right').clientHeight/2 + 100}, 200);
+	}
+	var label = document.getElementById('nameInput');
+	label.focus();
+	}
+}
+function letterpress() {
+	console.log('hello1');
+	var inputletters = document.getElementById('nameInput').value;
+	console.log(inputletters.toLowerCase());
+	console.log(current_word.toLowerCase());
+	if (('{{lang_foreign|safe}}'!='Chinese'&'{{lang_foreign|safe}}'!='Korean'&'{{lang_foreign|safe}}'!='Japanese') || inputletters.toString().match(/[\u3400-\u9FBF]/)){
+	if (inputletters.toLowerCase() !=current_word.toLowerCase()){
+		console.log(current_word);
+		var new_text = '';
+		for (var i = 0, len = current_word.length; i < len; i++) {
+ 			if (inputletters.toLowerCase().charAt(i)==current_word.toLowerCase().charAt(i)){
+				new_text = new_text + current_word.charAt(i);
+				console.log(new_text);
+			}
+			else {
+				break;
+			}
+		}
+		document.getElementById("nameInput").value=new_text;
+	}
+	else {
+	$.ajax(
+    {
+        dataType:"json",
+        url: "/ajax/typing",
+        data:{
+		'section': "{{section_on}}",
+		'entered': inputletters,
+		'username': '{{user_name|safe}}',
+		'book_name': "{{book_name|safe}}",
+		'language_foreign': '{{lang_foreign|safe}}',
+		'language_native': '{{lang_native|safe}}',
+		'latest_index': '{{iteration|safe}}',
+        },
+        success: function( data ) 
+        {
+		//if (!data["is_correct"]) {
+		//	tx = data['text'];
+		//	console.log(tx);
+		//	document.getElementById("nameInput").value=tx;
+		//}
+		if (data['is_correct']) {
+			console.log(data['highlight']);
+			document.getElementById('nameInput').removeEventListener('keyup', letterpress);
+			document.getElementById(data['first_id']).innerHTML=data['first_content'];
+			document.getElementById(data['second_id']).innerHTML=data['second_content'];
+			var label = document.getElementById('nameInput');
+			label.innerHTML='';
+			label.focus();
+			entered='';
+			console.log(data['current_word']);
+			current_word = data['current_word'];
+			console.log(data['second_index'])
+			label.style.width=getWidthOfText(data['current_word']);
+			var sen_list = {{mappings}}[data['second_index']-1];
+			console.log('info');
+			console.log(data['second_id']);
+			console.log(sen_list);
+			elems = document.getElementById('content').querySelectorAll('span');
+			for (i=0; i<elems.length; i++){
+				if (elems[i].className != 'slider round'){
+					elems[i].style.backgroundColor="transparent";
+				}
+			}
+			$('#left').animate({scrollTop: document.getElementById(data['second_id']).offsetTop-document.getElementById('left').clientHeight/2 + 100}, 1000);
+			for (i = 0; i < sen_list.length; i++){
+				native_id = '{{lang_native|safe}}'.substring(0,3)+sen_list[i];
+				console.log('native_id');
+				console.log(native_id);
+				if (data['highlight']=='on'){
+				document.getElementById(native_id).style.backgroundColor = "lemonchiffon";
+				}
+				if (i==0){
+				$('#right').animate({scrollTop: document.getElementById(native_id).offsetTop-document.getElementById('right').clientHeight/2 + 100}, 1000);
+			}
+			}
+		}
+        }
+});
+}}
+}
+
+function addletter() {
+	console.log('add_letter');
+	var shown = document.getElementById('nameInput').value;
+	var shown_length = shown.length;
+	var word = current_word;
+	console.log(word);
+	if (shown.length==word.length){document.getElementById('nameInput').value = word;}
+	next_letter = word.charAt(shown_length);
+	console.log(shown+next_letter);
+	document.getElementById('nameInput').value = shown+next_letter;
+	letterpress();
+	var label = document.getElementById('nameInput');
+	label.focus();
+}
+function addword() {
+	console.log('add_word');
+	console.log(current_word);
+	var word = current_word;
+	document.getElementById('nameInput').value = word;
+	letterpress();
+}
+
+function reallyAddBook(){
+console.log("{{lang_foreign|safe}}");
+$.ajax(
+    {
+        dataType:"json",
+        url: "/ajax/addbook",
+        data:{
+                'username': "{{user.get_username|safe}}",
+                'book_name': "{{book_name|safe}}".replace("*apos*", "'").split("*q*").join("\""),
+                'language_foreign': "{{lang_foreign|safe}}",
+                'language_native': "{{lang_native|safe}}",
+        },
+        success: function( data ){
+		console.log(data.url);
+        	window.location.href = data.url;
+	}
+});
+}
+
+function addBook(){
+	menuFunction(document.getElementsByClassName('menucontainer')[0]);
+        console.log('addBook called');
+        var modal = document.getElementById('newModal');
+        modal.style.display = "block";
+	$("body").toggleClass("dialogIsOpen");
+}
+
+function getRidOfModal(modal){
+        modal.style.display = "none";
+	document.getElementById('disablingDiv').style.display = 'none';
+	var label = document.getElementById('nameInput');
+	label.focus()
+	//$("body").toggleClass("dialogIsOpen");
+}
+
+function getRidOfRestart(modal){
+	modal.style.display = "none";
+        document.getElementById('disablingDiv').style.display = 'none';
+        $("body").toggleClass("dialogIsOpen");
+	var label = document.getElementById('nameInput');
+        label.focus()
+}
+
+function login(){
+dic = $('#loginform').serialize();
+dic = dic + '&b_name=' + "{{book_name|safe}}";
+dic = dic + '&language_native=' + "{{lang_native|safe}}";
+dic = dic + '&language_foreign=' + "{{lang_foreign|safe}}";
+dic = dic + '&section=' + "{{section}}";
+$.ajax(
+{
+	dataType:"json",
+	url: "/ajax/login",
+	data: dic,
+	success: function( data ){
+		if (data['move']=='yes'){
+			window.location.href=data.url;
+		}
+		else{
+		ins = document.getElementById('login_div').getElementsByTagName('input');
+                for (i=0;i<ins.length;i++){
+                        console.log(ins[i]);
+                        ins[i].value = '';
+                }
+		document.getElementsByClassName('error_messages')[0].innerHTML = '';
+		document.getElementsByClassName('error_messages')[0].innerHTML = data['error_messages'];	
+		}
+	}
+});	
+}
+
+function signup(){
+dic = $('#signupform').serialize();
+dic = dic + '&b_name=' + "{{book_name|safe}}";
+dic = dic + '&language_native=' + "{{lang_native|safe}}";
+dic = dic + '&language_foreign=' + "{{lang_foreign|safe}}";
+dic = dic + '&section=' + "{{section}}";
+$.ajax(
+{
+        dataType:"json",
+        url: "/ajax/signup",
+        data: dic,
+        success: function( data ){
+                if (data['move']=='yes'){
+                        window.location.href=data.url;
+                }
+                else{
+		ins = document.getElementById('signup_div').getElementsByTagName('input');
+		for (i=0;i<ins.length;i++){
+			console.log(ins[i]);
+			ins[i].value = '';
+		}
+		document.getElementsByClassName('error_messages')[1].innerHTML = ''
+		for (i=0;i<data['error_messages'].length;i++){	
+			parg = document.createElement('p');
+			parg.innerHTML = data['error_messages'][i];
+			console.log(parg);
+			document.getElementsByClassName('error_messages')[1].appendChild(parg);
+                }
+		}
+        }
+});     
+}	
+
+function open_signup() {
+	menuFunction(document.getElementsByClassName('menucontainer')[0]);
+	document.getElementById('signup_div').style.display = 'block';
+	document.getElementById('disablingDiv').style.display = 'block';
+}
+
+function open_login() {
+	menuFunction(document.getElementsByClassName('menucontainer')[0]);
+	document.getElementById('disablingDiv').style.display = 'block';
+	document.getElementById('login_div').style.display = 'block';
+}
+
+  
+</script>
+
+</head>
+ 
+<body id='body_reader' onload="initialize()">
+{% block login_content %}
+{% endblock %}
+{% block signup_content %}
+{% endblock %}
+  {% if not user.is_authenticated %}
+  <div id='warning'><span>You are not logged in right now. If you'd like Polly to remember your progress on this book, please </span><a style='text-decoration:none' href="{% url 'login_button' %}">Log In</a><span> or </span><a style='text-decoration:none' href="{% url 'signup' %}">Sign Up</a><span>. If not, your progress will be lost when you refresh or leave this page. Happy reading! </span><button type="button" id='got_it' onclick=getRidOfModal(document.getElementById('warning'))>Got it!</button></div>
+{% endif %}
+<div id=disablingDiv></div>
+<div class="header">
+  <span id='book_titles'>{{foreign_title}}  /  {{native_title}}</span>
+  <span class='menuspan'>
+<div class="menucontainer" onclick="menuFunction(this)">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+</div>
+</span>
+</div>
+<div id="myDropdown" class="dropdown-content">
+  {% if user.is_authenticated %}
+  <a id='add_book' href='#' onclick="addBook()">Restart book</a>
+  {% endif %}
+  {% if next_book|length > 0 %}
+  <a href="{% url 'reader' user_name=user_name language_native=lang_native language_foreign=lang_foreign book_name=next_book section=next_sec %}">Next book in collection</a>
+  {% endif %}
+  {% if collection|length != 1 %}
+  <a href="{% url 'col_library' user_name=user_name language_native=lang_native language_foreign=lang_foreign book_name=collection|cut:" " %}">{{collection}}</a>
+  {% endif %}
+  <a href="{% url 'text_library' user_name=user_name  language_native=lang_native language_foreign=lang_foreign%}">Library</a>
+  {% if user.is_authenticated %}
+  <a href="{% url 'logout' %}">Log Out</a>
+  {% endif %}
+  {% if not user.is_authenticated %}
+  <a href='#' onclick="open_login()">Log In</a>
+  <a href='#' onclick="open_signup()">Sign Up</a>
+  {% endif %}
+  </div>
+
+  <div id="content">
+  <div id="left">
+  <div id='foreign'> {{text_foreign|safe}}  </div>
+  </div>
+  <div id="right">
+  <div id="native"> {{text_native|safe}} </div>
+  </div>
+  </div>
+
+<div class='footer'>
+    <button class='button' type='button' id='add_letter' onclick=addletter()>Clue letter</button>
+    <button class='button' type='button' id='add_word' onclick=addword()>Show word</button>
+
+<div class="pagination">
+{% if section_count > 1 %}
+<span id='chapter'>Ch.</span>
+{% if before %}
+  <a href="{% url 'reader' user_name=user_name book_name=book_name|cut:" " language_native=lang_native language_foreign=lang_foreign section=section_on|add:"-1" %}">&laquo;</a>
+{% endif %}
+{% for page in result %}
+        {% if page|stringformat:"i" == section_on %}
+                <a class="active" href="#"> {{page}} </a>
+        {% endif %}
+        {% if page|stringformat:"i" != section_on %}
+                <a href="{% url 'reader' user_name=user_name book_name=book_name|cut:" " language_native=lang_native language_foreign=lang_foreign section=page %}"> {{page}} </a>
+        {% endif %}
+{% endfor %}
+{% if after %}
+  <a href="{% url 'reader' user_name=user_name book_name=book_name|cut:" " language_native=lang_native language_foreign=lang_foreign section=section_on|add:"-1" %}">&raquo;</a>
+{% endif %}
+{% endif %}
+</div>
+
+<label class="switch">
+  <input id="highlightswitch" onclick=highlight_func() type="checkbox">
+  <span class="slider round"></span>
+</label>
+<span id='matchingtext'>Sentence matching</span>
+<span class="popup" onclick="popupFunction()"><img src='/static/icons/info.png' width='17px'></img>
+  <span class="popuptext" id="myPopup"> When sentence matching is on, Polly tries to highlight the reference sentence in your native language. Bilingual sentence alignment is a new field, so please forgive the errors. It's not perfect, but it helps! </span>
+</span>
+
+</div>
+
+
+<div id="newModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span onclick=getRidOfModal(document.getElementById('newModal')) class="close">&times;</span>
+    <p>Are you sure you want to restart this book? Your current progress will be lost.</p>
+    <button type="button" id='dont_new' onclick=getRidOfRestart(document.getElementById('newModal'))>Nevermind!</button>
+    <button type="button" id='do_new' onclick=reallyAddBook()>Yes, I'm sure.</button>
+ </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<html>
+
+<head>
+  <script src="shared/jquery.js" type="text/javascript"></script>
+<style>
+#left {
+    float: left;
+    width: 40%;
+    height: 100%;
+    overflow: auto;
+    padding-right: 50;
+    font-size: 20px;
+}
+#right {
+	padding-left: 20;
+    float: left;
+    width: 40%;
+    height: 100%;
+    overflow: auto;
+    font-size: 20px;
+}
+</style>
+
+<script>
+
+function intialize()
+{
+    var pagins = pagination(section_on, section_count);
+    var before = pagins.before;
+    var result = pagins.result;
+    var after = pagins.after;
+    var book_inst = 
+}
+
+function pagination(currentPage, pageCount) {
+        let delta = 3,
+            left = currentPage - delta,
+            right = currentPage + delta + 1,
+            result = [];
+
+        result = Array.from({length: pageCount}, (v, k) => k + 1)
+            .filter(i => i && i >= left && i < right);
+	
+	if result[0]==1 {
+		before = 0
+	}
+	if result[0]>1 {
+		before = 1
+	}
+
+	if result[-1]==pageCount {
+		after = 0
+	}
+	if results[-1]<pageCount {
+		after = 1
+	}
+
+        return {before:before, result:result, after:after};
+}
+
+    $(document).on("keypress", function (e) {
+       console.log('Handler!');
+       Shiny.onInputChange("newletter", String.fromCharCode(e.which));
+    });
+    
+    $(document).on("click", "#add_letter", function(){
+    	console.log('Clicked!');
+    	Shiny.onInputChange("button_clicked", Math.random());
+    });
+    
+</script>
+
+</head>
+ 
+<body onload="intialize()">
+  <h1 id='book-name'>{{book_name}}</h1>
+
+  <div class="pagination">
+  
+{% if before %}
+  <a href="{% url 'reader_chapter' user_name=user_name book_name=book_name language_native=lang_native language_foreign=lang_foreign section=section_on-1 %}">&laquo;</a>
+{% endif %}
+{% for page in results %}
+	{% if page==section_selected %}
+		<a class="active" href="#"> {{page}} </a>
+	{% endif %}
+	{% if not page==section_selected %}
+                <a href="{% url 'reader_chapter' user_name=user_name book_name=book_name language_native=lang_native language_foreign=lang_foreign section=page %}"> {{page}} </a>
+        {% endif %}
+{% endfor %}
+{% if after %}
+  <a href="{% url 'reader_chapter' user_name=user_name book_name=book_name language_native=lang_native language_foreign=lang_foreign section=section_on+1 %}">&raquo;</a>
+{% endif %}
+
+</div>
+
+  <div id="content">
+  <div id="left">
+  <div id='foreign'> {{text_foreign}}  </div>
+  </div>
+  <div id="right">
+  <div id="native"> {{text_native}} </div>
+  </div>
+  </div>
+
+  <p>
+    <button type="button" id='add_letter'>Show letter</button> <span id='hints'> </span>
+  </p> 
+
+</body>
+
+</html>
